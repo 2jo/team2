@@ -21,26 +21,27 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void regist(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
+		bomap.create(vo);
 		
 	}
 
 	@Override
 	public BoardVO view(int bno) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return bomap.read(bno);
 	}
 
 	@Override
 	public void modify(BoardVO vo) throws Exception {
 		// TODO Auto-generated method stub
+		bomap.update(vo);
 		
 	}
 
 	@Override
 	public void remove(int bno) throws Exception {
 		// TODO Auto-generated method stub
-		
+		bomap.delete(bno);
 	}
 
 

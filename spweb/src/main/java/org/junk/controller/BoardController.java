@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junk.domain.BoardVO;
 import org.junk.service.BoardService;
+import org.junk.service.BoardServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardController {
 	
 	@Autowired
-	private BoardService service;
+	private BoardServiceImpl service;
 
 	private final static Logger logger = LoggerFactory.getLogger(BoardController.class);
 
@@ -39,7 +40,7 @@ public class BoardController {
 	public String postCreate(BoardVO vo, Model model) throws Exception {
 
 		logger.info("create post!!");
-		// service에서 등록해야 됨
+		service.regist(vo);
 		return "/board/result";
 	}
 
@@ -66,7 +67,7 @@ public class BoardController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String postUpdate(BoardVO vo, Model model) throws Exception {
 		logger.info("update page~~~~~~~~~~~~~~~~~~~");
-		
+		logger.info(vo.toString());
 		service.modify(vo);
 		return "/board/result";
 	}

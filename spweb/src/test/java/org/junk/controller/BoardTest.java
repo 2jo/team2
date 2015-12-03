@@ -30,7 +30,7 @@ public class BoardTest {
 	@Test
 	public void test() throws Exception{
 		
-		System.out.println(service.viewAll());
+		System.out.println(service.view(23));
 	}
 
 }

@@ -3,6 +3,7 @@
 
 <%@include file="../include/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
       <!-- Content Wrapper. Contains page content -->
@@ -11,13 +12,24 @@
         <section class="content-header">
           <h1>
             리스트 게시판 입니다. </h1>
-           <ul>
-            <c:forEach var="vo" items="${list}">
- 				<li>${vo.bno} : 
- 				<a href="/board/view?bno=${vo.bno}">${vo.title}</a> 
- 				: ${vo.writer}</li>           
-            </c:forEach>
-            </ul>
+           <table border="1" width:100% align="center" cellpadding="10">
+   		<tr>
+   			<th>번 호</th>
+   			<th>제 목</th>
+   			<th>작성자</th>
+   			<th>등록일</th>
+   			<th>조 회</th>
+   		</tr>
+   		<c:forEach var="list" items="${list }">
+   		<tr>
+   			<td>${list.bno}</td>
+   			<td><a href="/board/view?bno=${list.bno }">${list.title}</a></td>
+   			<td>${list.writer}</td> 
+   		<td><fmt:formatDate value="${list.regDate}" pattern="yy년 MM월 dd일"/></td>
+   		<td>${list.viewCount }</td>
+   		</tr>
+   		</c:forEach>
+   		</table>
           <hr>
           <a href="/board/create"><input type="submit" value="글쓰기"></a>
           
