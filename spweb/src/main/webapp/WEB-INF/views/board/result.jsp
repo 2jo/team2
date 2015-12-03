@@ -2,24 +2,16 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../include/header.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            리스트 게시판 입니다. </h1>
-           <ul>
-            <c:forEach var="vo" items="${list}">
- 				<li>${vo.bno} : 
- 				<a href="/board/view?bno=${vo.bno}">${vo.title}</a> 
- 				: ${vo.writer}</li>           
-            </c:forEach>
-            </ul>
-          <hr>
-          <a href="/board/create"><input type="submit" value="글쓰기"></a>
+		결과 페이지 입니다.
+            <small>Control panel</small>
+          </h1>
+          <a href="/board/list"><input type="submit" value="목록보기"></a>
           
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -29,7 +21,7 @@
 		</div><!-- /.content-wrapper -->
         <!------------------------------ Main content -------------------------------->
    
-      	
+      
 
 <%@include file="../include/footer.jsp" %>
 <script>

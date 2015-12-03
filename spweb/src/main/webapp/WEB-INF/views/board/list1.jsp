@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/header.jsp" %>
 
       <!-- Content Wrapper. Contains page content -->
@@ -8,27 +10,33 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-          조회 게시판 입니다
+            작업 할 게시판 입니다.
             <small>Control panel</small>
           </h1>
-          
-          <br>제목: ${VO.title}
-          <br>작성자: ${VO.writer}
-          <br>내용: ${VO.content}
-          
-          <a href="/board/delete?bno=${VO.bno}"><input type="submit" value="삭제"></a>
-          <a href="/board/update?bno=${VO.bno}"><input type="submit" value="수정"></a>
-          
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
         </section>
-		</div><!-- /.content-wrapper -->
+		
         <!------------------------------ Main content -------------------------------->
-   
-      
-
+   		<table border="1" width:100% align="center" cellpadding="10">
+   		<tr>
+   			<th>번 호</th>
+   			<th>제 목</th>
+   			<th>작성자</th>
+   			<th>등록일</th>
+   		</tr>
+   		<c:forEach var="list" items="${list }">
+   		<tr>
+   			<td>${list.bno}</td>
+   			<td><a href="../board/view?bno=${list.bno }">${list.title}</a></td>
+   			<td>${list.writer}</td> 
+   		<td><fmt:formatDate value="${list.regDate}" pattern="yy년 MM월 dd일"/></td>
+   		</tr>
+   		</c:forEach>
+   		</table>
+      </div><!-- /.content-wrapper -->
 <%@include file="../include/footer.jsp" %>
 <script>
 </script>

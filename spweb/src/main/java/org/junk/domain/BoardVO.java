@@ -4,23 +4,23 @@ import java.util.Date;
 
 public class BoardVO {
 
-	private Integer bno;
+	private int bno;
 	private String	content;
 	private	String	title;
 	private	String 	writer;
 	private Date	regDate;
 	private Date	updateDate;
-	private Integer	viewCount;
-	public Integer getBno() {
+	private int	viewCount;
+	public int getBno() {
 		return bno;
 	}
-	public Integer getViewCount() {
+	public int getViewCount() {
 		return viewCount;
 	}
-	public void setViewCount(Integer viewCount) {
+	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-	public void setBno(Integer bno) {
+	public void setBno(int bno) {
 		this.bno = bno;
 	}
 	public String getContent() {

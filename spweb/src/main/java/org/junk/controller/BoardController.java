@@ -1,5 +1,9 @@
 package org.junk.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junk.domain.BoardVO;
 import org.junk.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,23 +17,71 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/board/*")
 public class BoardController {
 	
-	//컨트롤러 담당자는 서비스의 메소드들이 다있다고가정하고 오토와이어드시킨후 가짜데이터로 테스트해본다.
 	@Autowired
 	private BoardService service;
-	
+
 	private final static Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
-	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public void listAll(Model model)throws Exception{
-		                        
-		model.addAttribute("list",service.viewAll());
-	}
-	
-	@RequestMapping(value="/view",method=RequestMethod.GET)
-	public void view(Integer bno, Model model)throws Exception{
+
+	@RequestMapping("/list")
+	public void listAll(Model model) throws Exception {
+
+		logger.info("list page~~~~~~~~~~~~~~~~~~~");		
 		
-		model.addAttribute("view",service.view(bno));
-		model.addAttribute("bno",bno);
+		model.addAttribute("list", service.viewAll());
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public void getCreate(Model model) throws Exception {
+		logger.info("create page~~~~~~~~~~~~~~~~~~~");
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String postCreate(BoardVO vo, Model model) throws Exception {
+
+		logger.info("create post!!");
+		// service에서 등록해야 됨
+		return "/board/result";
+	}
+
+	@RequestMapping("/view")
+	public void view(int bno, Model model) throws Exception {
+		logger.info(service.view(bno).toString());
+		model.addAttribute("VO", service.view(bno));
+		System.out.println(service.view(bno));
+		System.out.println("hhhh");
 	}
 	
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public void getUpdate(int bno, Model model) throws Exception {
+		
+		BoardVO vo = service.view(bno);
+
+		model.addAttribute("VO", vo);
+
+		logger.info("update page~~~~~~~~~~~~~~~~~~~");
+
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String postUpdate(BoardVO vo, Model model) throws Exception {
+		logger.info("update page~~~~~~~~~~~~~~~~~~~");
+		
+		service.modify(vo);
+		return "/board/result";
+	}
+
+	@RequestMapping("/delete")
+	public String delete(int bno, Model model) throws Exception {
+		logger.info("delete page~~~~~~~~~~~~~~~~~~~");
+		// 서비스에서 삭제 처리 되야됨.
+		service.remove(bno);
+		return "/board/result";
+	}
+
+	@RequestMapping("/result")
+	public void result(Model model) throws Exception {
+		logger.info("result page~~~~~~~~~~~~~~~~~~~");
+	}
+
 }

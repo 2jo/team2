@@ -29,7 +29,7 @@ public class BoardMapperImpl implements BoardMapper {
 	}
 
 	@Override
-	public BoardVO read(Integer bno) throws Exception {
+	public BoardVO read(int bno) throws Exception {
 		BoardVO vo = session.selectOne("org.junk.persistence.BoardMapper.read",bno);
 		return vo;
 	}
@@ -41,7 +41,7 @@ public class BoardMapperImpl implements BoardMapper {
 	}
 
 	@Override
-	public void delete(Integer bno) throws Exception {
+	public void delete(int bno) throws Exception {
 		session.delete("org.junk.persistence.BoardMapper.delete",bno);
 
 	}

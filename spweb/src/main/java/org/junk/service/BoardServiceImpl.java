@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO view(Integer bno) throws Exception {
+	public BoardVO view(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,7 +38,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void remove(Integer bno) throws Exception {
+	public void remove(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
