@@ -21,16 +21,16 @@ public class BoardController {
 
 	private final static Logger logger = LoggerFactory.getLogger(BoardController.class);
 
-	@RequestMapping(value="/slist", method = RequestMethod.GET)
-	public void listSearch(@ModelAttribute("cri") Criteria cri) throws Exception {
+	@RequestMapping(value="/list", method = RequestMethod.GET)
+	public void listSearch(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		
-		logger.info("-------------------------------------");
-		logger.info(cri.toString());
-		logger.info("=====================================");
+		logger.info("slist page~~~~~~~~~~~~~~~~~~~");		
+		
+		model.addAttribute("list", service.viewPart(cri));
 		
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list2")
 	public void listAll(Model model) throws Exception {
 
 		logger.info("list page~~~~~~~~~~~~~~~~~~~");		

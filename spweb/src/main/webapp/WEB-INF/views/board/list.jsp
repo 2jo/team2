@@ -35,9 +35,10 @@
             <li class="active">Dashboard</li>
           </ol>
         </section>
+        <%@include file="../include/paging.jsp" %>   
 		</div><!-- /.content-wrapper -->
         <!------------------------------ Main content -------------------------------->
-   
+
 <%@include file="../include/footer.jsp" %>
 <script>
 </script>

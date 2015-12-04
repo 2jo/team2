@@ -2,8 +2,9 @@ package org.junk.service;
 
 import java.util.List;
 
-import org.junk.persistence.BoardMapperImpl;
 import org.junk.domain.BoardVO;
+import org.junk.domain.Criteria;
+import org.junk.persistence.BoardMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -44,5 +45,11 @@ public class BoardServiceImpl implements BoardService {
 		bomap.delete(bno);
 	}
 
+	@Override
+	public List<BoardVO> viewPart(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return bomap.search(cri);
+	}
 
+	
 }
