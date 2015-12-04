@@ -1,35 +1,46 @@
 package org.junk.controller;
 
-import javax.sql.DataSource;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junk.service.BoardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 @ContextConfiguration(
 		locations ={"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
-public class BoardTest {
+public class BoardControllerTest {
 
 	@Autowired
-	private BoardServiceImpl service;
+	WebApplicationContext wac;
 	
-	//testing for db
-	@Autowired
-	private DataSource ds;
+	MockMvc mockMvc;
 	
+	@Before
+	public void setup(){
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+	}
+
 	@Test
 	public void test() throws Exception{
+		MvcResult result = mockMvc.perform(
+				MockMvcRequestBuilders.get("/board/slist")
+				.param("pageNo", "2")
+				.param("searchType", "t")
+		).andReturn();
 		
-		System.out.println(service.view(23));
+		ModelAndView mav = result.getModelAndView();
+		System.out.println(mav.getModel().get("cri"));
+		System.out.println(mav.getViewName()); // 포스트 방식 테스트
 	}
 
 }

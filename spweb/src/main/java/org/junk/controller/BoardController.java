@@ -1,16 +1,14 @@
 package org.junk.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junk.domain.BoardVO;
-import org.junk.service.BoardService;
+import org.junk.domain.Criteria;
 import org.junk.service.BoardServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,6 +21,15 @@ public class BoardController {
 
 	private final static Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+	@RequestMapping(value="/slist", method = RequestMethod.GET)
+	public void listSearch(@ModelAttribute("cri") Criteria cri) throws Exception {
+		
+		logger.info("-------------------------------------");
+		logger.info(cri.toString());
+		logger.info("=====================================");
+		
+	}
+	
 	@RequestMapping("/list")
 	public void listAll(Model model) throws Exception {
 
