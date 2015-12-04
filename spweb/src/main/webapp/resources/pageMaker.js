@@ -34,9 +34,9 @@ function makePage(criteria){
 
 }
 var cri = {
-    pageNo:12,
+    pageNo:'<%=cri.pageNo%>',
     totalCount : 320,
-    perPage : 10,
+    perPage : '<%=cri.perPage%>',
     searchType : 'w'
 };
 console.log(makePage(cri));
