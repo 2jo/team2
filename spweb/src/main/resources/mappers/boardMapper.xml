@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.junk.persistence.BoardMapper">
+  <select id="allList" resultType="org.junk.domain.BoardVO">
+  select * from tbl_board order by bno desc
+  </select>
+  
+  <insert id="create">
+  insert into tbl_board (bno, title, content, writer) values(seq_board.nextval,#{title},#{content},#{writer})
+  </insert>
+  
+  <select id="read" resultType="org.junk.domain.BoardVO">
+  select * from tbl_board where bno = #{bno}
+  </select>
+  
+  <update id="update">
+  update tbl_board set title=#{title},content=#{content} where bno=#{bno}
+  </update>
+  
+  <delete id="delete">
+  delete from tbl_board where bno=#{bno} 
+  </delete>
+  
+  <sql id="cri">
+    <if test="searchType != null">
+	  <if test="searchType eq 't'.toString()">
+	  and title like '%'||#{keyword}||'%'
+	  </if>
+ 	</if>
+  </sql>
+  
+  <select id="search" resultType="org.junk.domain.BoardVO">
+  <![CDATA[
+  select *
+	from
+  	(
+  	select 
+  	/*+index_desc(tbl_board pk_board)*/
+  	rownum rn, bno, title, writer, regdate, viewcount
+  	from tbl_board
+  	where bno > 0
+  ]]>
+  	<include refid="cri"></include>	
+
+  <![CDATA[
+    and rownum <= #{pageNo} * #{perPage}
+  	)
+  where rn > (#{pageNo} -1) * #{perPage}
+  ]]>
+  </select>
+  
+  <select id="searchCount" resultType="int">
+  <![CDATA[
+  select count(*) from tbl_board where bno > 0
+  ]]>
+    <include refid="cri"></include>	
+  </select>
+  </mapper>
